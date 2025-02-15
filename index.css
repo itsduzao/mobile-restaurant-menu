@@ -1,0 +1,126 @@
+:root {
+  --black: #000000;
+  --white: #ffffff;
+  --medium-black: #3C3C3C;
+  --dark-gray: #8B8B8B;
+  --light-gray: #D2D2D2;
+  --dark-white: #DEDEDE;
+}
+
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* utility */
+
+.ff-primary {
+  font-style: normal;
+  font-weight: 400;
+  font-family: "Smythe", serif;
+}
+
+.app {
+  margin: 0 auto;
+  width: 600px;
+  height: auto;
+}
+
+/* banner */
+
+header {
+  position: relative;
+  margin: 0;
+  width: 100%;
+  height: 167px;
+  /* overflow: hidden; */
+
+  .banner-img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 65%;
+  }
+
+  .banner-text {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    gap: 16px;
+    inset: 50px 40px;
+  }
+
+  .banner-title {
+    color: var(--white);
+    font-size: 2.5rem;
+    line-height: 24px;
+  }
+
+  .banner-subtitle {
+    color: var(--white);
+    font-size: 1.5rem;
+    line-height: 14px;
+  }
+}
+
+/* menu */
+
+.app-menu {
+  box-sizing: border-box;
+  border: 2px red solid;
+  padding: 52px 46px;
+  width: 100%;
+  height: auto;
+
+  .item-container {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    border-bottom: var(--light-gray) 1px solid;
+    padding-bottom: 50px;
+    width: 100%;
+
+    .item-img {
+      position: relative;
+      left: -2%;
+      font-weight: 400;
+      font-size: 4.875rem;
+      line-height: 98px;
+    }
+
+    .item-info {
+      .item-title {
+        font-size: 1.75rem;
+      }
+
+      .item-description {
+        color: var(--dark-gray);
+        line-height: 24px;
+      }
+
+      .item-price {
+        font-size: 1.25rem;
+        line-height: 24px;
+      }
+    }
+
+    .btn-add {
+      display: flex;
+      position: relative;
+      justify-content: center;
+      align-items: center;
+      margin-left: auto;
+      border: var(--dark-white) 1px solid;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      color: var(--medium-black);
+      font-weight: 200;
+      font-size: 32px;
+      line-height: 24px;
+      font-family: 'inter', sans-serif;
+    }
+  }
+}

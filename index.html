@@ -6,33 +6,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Smythe&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,200&family=Smythe&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="index.css">
   <title>Jimmy's Diner</title>
 </head>
 
 <body>
-  <header role="banner">
-    <img role="img" src="./assets/img/banner.jpeg" alt="hamburguer on top of a brown table">
-    <div class="header-title">Jimmy's Diner</div>
-    <div class="header-subtitle">The best burgers and pizzas in town.</div>
-  </header>
-  <main>
-    <section role="list">
-      <div role="listitem">
-        <div class="item-img" role="img" aria-label="slice of pizza">EMOJI</div>
-        <div role="group">
-          <div class="item-title">ITEM</div>
-          <div class="item-description">INGREDIENTES</div>
-          <div class="item-price">R$XX</div>
-        </div>
-        <div class="btn-add" role="button">
-          +
-        </div>
-        <hr>
+  <div class="app">
+    <header class="ff-primary" role="banner">
+      <img class="banner-img" role="img" src="./assets/img/banner.jpeg" alt="hamburguer on top of a brown table">
+      <div class="banner-text">
+        <div class="banner-title">Jimmy's Diner</div>
+        <div class="banner-subtitle">The best burgers and pizzas in town.</div>
       </div>
-    </section>
-  </main>
+    </header>
+    <main>
+      <section class="app-menu ff-primary" role="list">
+        <div class="item-container" role="listitem">
+          <div class="item-img" role="img" aria-label="slice of pizza">🍕</div>
+          <div class="item-info" role="group">
+            <div class="item-title">Pizza</div>
+            <div class="item-description">pepperoni,mushrom,mozarella</div>
+            <div class="item-price">$14</div>
+          </div>
+          <div class="btn-add" role="button">
+            +
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
 </body>
 
 </html>
