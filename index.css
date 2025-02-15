@@ -8,6 +8,9 @@
   --dark-white: #DEDEDE;
   --white: #ffffff;
   --btn-background: #16DB99;
+  --input-border: #757575;
+  --bg-order-complete: #ECFDF5;
+  --fc-order-complete: #065F46;
 }
 
 body {
@@ -24,7 +27,14 @@ body {
   font-family: "Smythe", serif;
 }
 
+.hidden {
+  display: none;
+}
+
+/* app */
+
 .app {
+  position: relative;
   margin: 0 auto;
   width: 600px;
   height: auto;
@@ -67,11 +77,15 @@ header {
   }
 }
 
+main {
+  padding: 0 46px;
+}
+
 /* menu */
 
 .app-menu {
   box-sizing: border-box;
-  padding: 52px 46px;
+  padding: 52px 0;
   width: 100%;
   height: auto;
 
@@ -130,7 +144,6 @@ header {
 /* order checkout */
 
 .order-checkout {
-  padding: 0px 46px;
 
   .order-checkout-container {
     .order-title {
@@ -195,5 +208,91 @@ header {
       line-height: 24px;
       font-family: Verdana, Geneva, Tahoma, sans-serif;
     }
+  }
+}
+
+/* payment modal */
+
+.payment-modal {
+  .modal-container {
+    position: fixed;
+    z-index: 1;
+    box-sizing: border-box;
+    margin: auto;
+    inset: 0;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2),
+      0 5px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    background-color: var(--white);
+    padding: 30px 24px;
+    width: 524px;
+    height: fit-content;
+
+    .modal-title {
+      margin-bottom: 46px;
+      font-weight: 700;
+      font-size: 1.5rem;
+      line-height: 32px;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      text-align: center;
+    }
+
+    .payment-details {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+      .input-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+
+        input {
+          border: 1.3px solid var(--input-border);
+          border-radius: 2px;
+          height: 72px;
+          font-size: 1.25rem;
+          font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+          &::placeholder {
+            padding-left: 26px;
+            color: var(--input-border);
+            font-weight: 400;
+            font-size: 1.25rem;
+            line-height: 32px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+          }
+        }
+      }
+
+      .btn-pay {
+        appearance: none;
+        box-sizing: border-box;
+        margin-top: 46px;
+        border: none;
+        border-radius: 4px;
+        background-color: var(--btn-background);
+        padding: 14px 0;
+        width: 100%;
+        color: var(--white);
+        font-weight: 700;
+        font-size: 1rem;
+        line-height: 32px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+      }
+    }
+  }
+}
+
+/* order complete */
+
+.order-complete {
+  .order-status {
+    border-radius: 3px;
+    background-color: var(--bg-order-complete);
+    padding: 52px 0;
+    color: var(--fc-order-complete);
+    font-size: 2rem;
+    text-align: center;
   }
 }
