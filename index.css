@@ -1,10 +1,13 @@
 :root {
   --black: #000000;
-  --white: #ffffff;
   --medium-black: #3C3C3C;
+  --light-black: #393333;
   --dark-gray: #8B8B8B;
+  --medium-gray: #BBBBBB;
   --light-gray: #D2D2D2;
   --dark-white: #DEDEDE;
+  --white: #ffffff;
+  --btn-background: #16DB99;
 }
 
 body {
@@ -34,7 +37,6 @@ header {
   margin: 0;
   width: 100%;
   height: 167px;
-  /* overflow: hidden; */
 
   .banner-img {
     position: absolute;
@@ -69,7 +71,6 @@ header {
 
 .app-menu {
   box-sizing: border-box;
-  border: 2px red solid;
   padding: 52px 46px;
   width: 100%;
   height: auto;
@@ -114,6 +115,7 @@ header {
       margin-left: auto;
       border: var(--dark-white) 1px solid;
       border-radius: 50%;
+      background: none;
       width: 50px;
       height: 50px;
       color: var(--medium-black);
@@ -121,6 +123,77 @@ header {
       font-size: 32px;
       line-height: 24px;
       font-family: 'inter', sans-serif;
+    }
+  }
+}
+
+/* order checkout */
+
+.order-checkout {
+  padding: 0px 46px;
+
+  .order-checkout-container {
+    .order-title {
+      margin-bottom: 64px;
+      font-size: 1.75rem;
+      text-align: center;
+    }
+
+    .order-details {
+      display: flex;
+      align-items: center;
+
+      .order-item {
+        margin-right: 14px;
+        font-size: 1.75rem;
+      }
+
+      .btn-remove {
+        align-self: end;
+        appearance: none;
+        border: none;
+        background: none;
+        color: var(--medium-gray);
+        font-size: 0.75rem;
+        line-height: 24px;
+      }
+
+      .order-price {
+        margin-left: auto;
+      }
+    }
+
+    .divider {
+      margin: 30px 0 14px;
+      border: var(--light-black) 2px solid;
+      width: 100%;
+    }
+
+    .order-total-price-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .order-total-price-title {
+        font-size: 1.75rem;
+        line-height: 24px;
+      }
+
+    }
+
+    .btn-complete-order {
+      box-sizing: border-box;
+      margin: 52px 0;
+      box-shadow: 0px 1px 2px 0px #0000000D;
+      border: none;
+      border-radius: 3px;
+      background-color: var(--btn-background);
+      padding: 18px;
+      width: 100%;
+      color: var(--white);
+      font-weight: 700;
+      line-height: 24px;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
     }
   }
 }
