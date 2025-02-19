@@ -2,6 +2,12 @@ import { MENU_ITEMS } from './src/data/data.js'
 
 let orderItems = {}
 
+document.addEventListener('click', event => {
+  if (event.target.classList.contains('btn-add') && event.target.dataset.id) {
+    handleMenuItemClick(event)
+  }
+})
+
 function getMenuItemsHTML(dataArr) {
   const htmlContent = []
 
@@ -27,14 +33,6 @@ function renderMenuItems() {
   document.getElementById('app-menu').innerHTML = getMenuItemsHTML(MENU_ITEMS)
 }
 
-document.addEventListener('click', event => {
-  if (event.target.classList.contains('btn-add') && event.target.dataset.id) {
-    handleMenuItemClick(event)
-  }
-})
-
-renderMenuItems()
-
 function handleMenuItemClick(event) {
   const targetItem = MENU_ITEMS.filter(item => {
     return item.id === Number(event.target.dataset.id)
@@ -49,5 +47,47 @@ function handleMenuItemClick(event) {
   if (orderCheckoutElement.classList.contains('hidden')) {
     orderCheckoutElement.classList.remove('hidden')
   }
+
+  renderOrderCheckout()
 }
+
+function getOrderCheckoutHtml() {
+  const orderItemsHtml = Object.keys(orderItems)
+    .map(id => {
+      const item = MENU_ITEMS.find(menuItem => {
+        return menuItem.id === Number(id)
+      })
+      return `<div class="order-item">
+                  <div class="order-item-name">${item.name}</div>
+                  <div class="order-item-quantity">x${orderItems[id]}</div>
+                  <button class="btn-remove" type="button" data-id="${id}">remove</button>
+                  <div class="order-item-price">$${
+                    item.price * orderItems[id]
+                  }</div>
+              </div>`
+    })
+    .join('')
+
+  const totalPrice = Object.keys(orderItems).reduce((total, id) => {
+    const item = MENU_ITEMS.find(menuItem => menuItem.id === Number(id))
+    return total + item.price * orderItems[id]
+  }, 0)
+
+  return `<div class="order-checkout-container">
+            <div class="order-title">Your order</div>
+            <div class="order-details">${orderItemsHtml}</div>
+            <div class="divider"></div>
+            <div class="order-total-price-container">
+              <div class="order-total-price-title">Total price:</div>
+              <div class="order-total-price">$${totalPrice}</div>
+            </div>
+            <button class="btn-complete-order" type="button">Complete order</button>
+          </div>`
+}
+
+function renderOrderCheckout() {
+  document.getElementById('order-checkout').innerHTML = getOrderCheckoutHtml()
+}
+
+renderMenuItems()
 

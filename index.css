@@ -155,26 +155,35 @@ main {
 
     .order-details {
       display: flex;
-      align-items: center;
+      flex-direction: column;
 
       .order-item {
-        margin-right: 14px;
-        font-size: 1.75rem;
-      }
+        display: flex;
+        align-items: self-end;
 
-      .btn-remove {
-        align-self: end;
-        appearance: none;
-        cursor: pointer;
-        border: none;
-        background: none;
-        color: var(--medium-gray);
-        font-size: 0.75rem;
-        line-height: 24px;
-      }
+        .order-item-name {
+          margin-right: 14px;
+          font-size: 1.75rem;
+        }
 
-      .order-price {
-        margin-left: auto;
+        .btn-remove {
+          appearance: none;
+          cursor: pointer;
+          border: none;
+          background: none;
+          color: var(--medium-gray);
+          font-size: 0.75rem;
+          line-height: 24px;
+        }
+
+        .order-item-quantity {
+          margin-right: 14px;
+          line-height: 24px;
+        }
+
+        .order-item-price {
+          margin-left: auto;
+        }
       }
     }
 
