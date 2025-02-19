@@ -9,31 +9,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,200&family=Smythe&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="index.css">
+  <script type="module" src="index.js"></script>
   <title>Jimmy's Diner</title>
 </head>
 
 <body>
   <div class="app">
     <header class="ff-primary" role="banner">
-      <img class="banner-img" role="img" src="./assets/img/banner.jpeg" alt="hamburguer on top of a brown table">
+      <img class="banner-img" role="img" src="./src/assets/img/banner.jpeg" alt="hamburguer on top of a brown table">
       <div class="banner-text">
         <div class="banner-title">Jimmy's Diner</div>
         <div class="banner-subtitle">The best burgers and pizzas in town.</div>
       </div>
     </header>
-    <main>
-      <section class="app-menu ff-primary" role="list">
-        <div class="item-container" role="listitem">
-          <div class="item-img" role="img" aria-label="slice of pizza">🍕</div>
-          <div class="item-info" role="group">
-            <div class="item-title">Pizza</div>
-            <div class="item-description">pepperoni,mushrom,mozarella</div>
-            <div class="item-price">$14</div>
-          </div>
-          <button class="btn-add" type="button">
-            +
-          </button>
-        </div>
+    <main id="app">
+      <section id="app-menu" class="app-menu ff-primary" role="list">
       </section>
       <section class="order-checkout ff-primary">
         <div class="order-checkout-container">
