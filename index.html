@@ -25,14 +25,14 @@
     <main>
       <section id="app-menu" class="app-menu ff-primary" role="list">
       </section>
-      <section class="order-checkout ff-primary">
+      <section id="order-checkout" class="order-checkout hidden ff-primary">
         <div class="order-checkout-container">
           <div class="order-title">
             Your order
           </div>
           <div class="order-details">
             <div class="order-item">Pizza</div>
-            <button class="btn-remove" type="button">remove</button>
+            <button class="btn-remove" type="button" data-id="id">remove</button>
             <div class="order-price">$14</div>
           </div>
           <div class="divider"></div>
@@ -61,7 +61,7 @@
           </form>
         </div>
       </section>
-      <section class="order-complete ff-primary">
+      <section class="order-complete hidden ff-primary">
         <div class="order-status">
           Thanks, Ronaldo! Your order is on its way!
         </div>
