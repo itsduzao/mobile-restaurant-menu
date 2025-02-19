@@ -126,6 +126,7 @@ main {
       position: relative;
       justify-content: center;
       align-items: center;
+      cursor: pointer;
       margin-left: auto;
       border: var(--dark-white) 1px solid;
       border-radius: 50%;
@@ -164,6 +165,7 @@ main {
       .btn-remove {
         align-self: end;
         appearance: none;
+        cursor: pointer;
         border: none;
         background: none;
         color: var(--medium-gray);
@@ -195,6 +197,7 @@ main {
     }
 
     .btn-complete-order {
+      cursor: pointer;
       box-sizing: border-box;
       margin: 52px 0;
       box-shadow: 0px 1px 2px 0px #0000000D;
@@ -267,6 +270,7 @@ main {
 
       .btn-pay {
         appearance: none;
+        cursor: pointer;
         box-sizing: border-box;
         margin-top: 46px;
         border: none;
