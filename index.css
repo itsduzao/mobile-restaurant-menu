@@ -85,7 +85,7 @@ main {
 
 .app-menu {
   box-sizing: border-box;
-  padding: 52px 0;
+  margin: 22px 0 45px 0;
   width: 100%;
   height: auto;
 
@@ -94,7 +94,7 @@ main {
     align-items: center;
     box-sizing: border-box;
     border-bottom: var(--light-gray) 1px solid;
-    padding-bottom: 50px;
+    padding: 45px 0px;
     width: 100%;
 
     .item-img {
