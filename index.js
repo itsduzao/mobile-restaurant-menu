@@ -234,11 +234,10 @@ function addModalCloseHandler() {
 
     if (isTargetNotModalDescendant && isPaymentModalVisible) {
       paymentModal.classList.add('hidden')
-      document.removeEventListener('click', closeModal)
     }
   }
 
-  document.addEventListener('click', closeModal)
+  document.addEventListener('click', closeModal, { once: true })
 }
 
 function getCompleteOrderStatusHtml(name) {
@@ -262,14 +261,16 @@ function renderCompleteOrderStatus(formData) {
 
   const paymentForm = document.getElementById('payment-details-form')
   resetForm(paymentForm)
-
-  const paymentModal = document.getElementById('payment-modal')
-  paymentModal.classList.add('hidden')
 }
 
-renderMenuItems()
+function initializeApp() {
+  if (!window.hasInitialized) {
+    renderMenuItems()
+    addButtonClickHandlers()
+    addFormListeners()
+    window.hasInitialized = true
+  }
+}
 
-addButtonClickHandlers()
-
-addFormListeners()
+document.addEventListener('DOMContentLoaded', initializeApp, { once: true })
 
