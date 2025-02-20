@@ -1,6 +1,6 @@
 import { MENU_ITEMS } from './src/data/data.js'
 
-let orderItems = {}
+const orderItems = []
 
 document.addEventListener('click', event => {
   if (event.target.classList.contains('btn-add') && event.target.dataset.id) {
@@ -38,9 +38,11 @@ function handleMenuItemClick(event) {
     return item.id === Number(event.target.dataset.id)
   })[0]
 
-  !orderItems[`${targetItem.id}`]
-    ? (orderItems[`${targetItem.id}`] = 1)
-    : (orderItems[`${targetItem.id}`] += 1)
+  const orderedItem = orderItems.find(item => item.id === targetItem.id)
+
+  orderedItem
+    ? (orderedItem.quantity += 1)
+    : orderItems.push({ ...targetItem, quantity: 1 })
 
   const orderCheckoutElement = document.querySelector('#order-checkout')
 
@@ -52,25 +54,20 @@ function handleMenuItemClick(event) {
 }
 
 function getOrderCheckoutHtml() {
-  const orderItemsHtml = Object.keys(orderItems)
-    .map(id => {
-      const item = MENU_ITEMS.find(menuItem => {
-        return menuItem.id === Number(id)
-      })
+  const orderItemsHtml = orderItems
+    .map(item => {
+      const { name, id, price, quantity } = item
       return `<div class="order-item">
-                  <div class="order-item-name">${item.name}</div>
-                  <div class="order-item-quantity">x${orderItems[id]}</div>
+                  <div class="order-item-name">${name}</div>
+                  <div class="order-item-quantity">x${quantity}</div>
                   <button class="btn-remove" type="button" data-id="${id}">remove</button>
-                  <div class="order-item-price">$${
-                    item.price * orderItems[id]
-                  }</div>
+                  <div class="order-item-price">$${price * quantity}</div>
               </div>`
     })
     .join('')
 
-  const totalPrice = Object.keys(orderItems).reduce((total, id) => {
-    const item = MENU_ITEMS.find(menuItem => menuItem.id === Number(id))
-    return total + item.price * orderItems[id]
+  const totalPrice = orderItems.reduce((total, item) => {
+    return total + item.price * item.quantity
   }, 0)
 
   return `<div class="order-checkout-container">
