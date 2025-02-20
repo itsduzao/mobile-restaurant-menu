@@ -18,7 +18,7 @@ function addButtonClickHandlers() {
     }
 
     if (isBtnCompleteOrder) {
-      handleCompleteOrderClick()
+      handleCompleteOrderClick(event)
     }
   })
 }
@@ -30,7 +30,7 @@ function addFormListeners() {
   const cardPwInput = document.getElementById('customer-card-pw')
 
   cardNameInput.addEventListener('input', function () {
-    this.value = this.value.replace(/[^a-zA-Z\s]/, '')
+    this.value = this.value.replace(/[^a-zA-Z\s]/g, '')
   })
 
   cardNumberInput.addEventListener('input', function () {
@@ -50,7 +50,14 @@ function addFormListeners() {
       cardNumberInput,
       cardPwInput,
     })
-    isFormValid ? resetForm(paymentForm) : paymentForm.reportValidity()
+
+    if (!isFormValid) return paymentForm.reportValidity()
+
+    const paymentModal = document.getElementById('payment-modal')
+    paymentModal.classList.add('hidden')
+
+    const formData = new FormData(paymentForm)
+    renderCompleteOrderStatus(formData)
   })
 }
 
@@ -138,6 +145,12 @@ function renderMenuItems() {
 }
 
 function handleMenuItemClick(event) {
+  const completedOrderContainer = document.getElementById('order-complete')
+
+  if (!completedOrderContainer.classList.contains('hidden')) {
+    completedOrderContainer.classList.add('hidden')
+  }
+
   const targetItem = MENU_ITEMS.filter(item => {
     return item.id === Number(event.target.dataset.id)
   })[0]
@@ -201,24 +214,57 @@ function handleRemoveItemClick(event) {
   renderOrderCheckout()
 }
 
-function handleCompleteOrderClick() {
+function handleCompleteOrderClick(event) {
+  event.stopPropagation()
+
   const paymentModal = document.querySelector('#payment-modal')
-  const paymentForm = document.querySelector('#payment-details-form')
-  resetForm(paymentForm)
-  paymentModal.classList.remove('hidden')
+  if (paymentModal.classList.contains('hidden')) {
+    paymentModal.classList.remove('hidden')
+  }
+  addModalCloseHandler()
 }
 
 function addModalCloseHandler() {
-  document.addEventListener('click', event => {
-    const paymentModal = document.querySelector('#payment-modal')
-    const modalContainer = document.querySelector('.modal-container')
+  const paymentModal = document.querySelector('#payment-modal')
+  const modalContainer = document.querySelector('.modal-container')
+
+  function closeModal(event) {
     const isTargetNotModalDescendant = !modalContainer.contains(event.target)
     const isPaymentModalVisible = !paymentModal.classList.contains('hidden')
 
-    if (paymentModal && isTargetNotModalDescendant && isPaymentModalVisible) {
+    if (isTargetNotModalDescendant && isPaymentModalVisible) {
       paymentModal.classList.add('hidden')
+      document.removeEventListener('click', closeModal)
     }
-  })
+  }
+
+  document.addEventListener('click', closeModal)
+}
+
+function getCompleteOrderStatusHtml(name) {
+  return `<div class="order-status">
+            Thanks, ${name}! Your order is on its way!
+          </div>`
+}
+
+function renderCompleteOrderStatus(formData) {
+  const customerName = formData.get('customer-name')
+  const orderStatusMessage = getCompleteOrderStatusHtml(customerName)
+  const orderStatusContainer = document.getElementById('order-complete')
+  const orderCheckoutContainer = document.getElementById('order-checkout')
+
+  orderCheckoutContainer.classList.add('hidden')
+
+  orderStatusContainer.innerHTML = orderStatusMessage
+  orderStatusContainer.classList.remove('hidden')
+
+  orderItems.length = 0
+
+  const paymentForm = document.getElementById('payment-details-form')
+  resetForm(paymentForm)
+
+  const paymentModal = document.getElementById('payment-modal')
+  paymentModal.classList.add('hidden')
 }
 
 renderMenuItems()
@@ -226,6 +272,4 @@ renderMenuItems()
 addButtonClickHandlers()
 
 addFormListeners()
-
-addModalCloseHandler()
 
