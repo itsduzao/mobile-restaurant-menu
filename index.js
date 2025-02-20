@@ -23,18 +23,93 @@ function addButtonClickHandlers() {
   })
 }
 
-function addFormInputValidation() {
+function addFormListeners() {
+  const paymentForm = document.getElementById('payment-details-form')
+  const cardNameInput = document.getElementById('customer-name')
   const cardNumberInput = document.getElementById('customer-card-number')
   const cardPwInput = document.getElementById('customer-card-pw')
 
+  cardNameInput.addEventListener('input', function () {
+    this.value = this.value.replace(/[^a-zA-Z\s]/, '')
+  })
+
   cardNumberInput.addEventListener('input', function () {
-    this.value = this.value.replace(/\D/g, '')
+    this.value = this.value.replace(/\D/g, '').slice(0, 16)
     this.value = this.value.replace(/(\d{4})(?=\d)/g, '$1-')
   })
 
   cardPwInput.addEventListener('input', function () {
     this.value = this.value.replace(/\D/g, '')
   })
+
+  paymentForm.addEventListener('submit', event => {
+    event.preventDefault()
+    const isFormValid = validateForm({
+      paymentForm,
+      cardNameInput,
+      cardNumberInput,
+      cardPwInput,
+    })
+    isFormValid ? resetForm(paymentForm) : paymentForm.reportValidity()
+  })
+}
+
+function validateForm(formElements) {
+  const { paymentForm, cardNameInput, cardNumberInput, cardPwInput } =
+    formElements
+
+  const validations = [
+    {
+      input: cardNameInput,
+      validities: [
+        {
+          isValid: () => cardNameInput.value.trim() !== '',
+          message: 'Name must not be blank.',
+        },
+        {
+          isValid: () => cardNameInput.value.length >= 4,
+          message: 'Please enter your name (at least 4 characters).',
+        },
+      ],
+    },
+    {
+      input: cardNumberInput,
+      validities: [
+        {
+          isValid: () => cardNumberInput.value.length === 19,
+          message:
+            'Please enter a valid card number in the format xxxx-xxxx-xxxx-xxxx.',
+        },
+      ],
+    },
+    {
+      input: cardPwInput,
+      validities: [
+        {
+          isValid: () => cardPwInput.value.length === 3,
+          message: 'Please enter a valid 3-digit CVV.',
+        },
+      ],
+    },
+  ]
+
+  const isFormValid = !validations.some(({ input, validities }) => {
+    input.setCustomValidity('')
+    const isInputValid = validities.some(({ isValid, message }) => {
+      if (!isValid()) {
+        input.setCustomValidity(message)
+        return true
+      }
+      return false
+    })
+    return isInputValid
+  })
+
+  return isFormValid
+}
+
+function resetForm(form) {
+  form.reset()
 }
 
 function getMenuItemsHTML(dataArr) {
@@ -128,12 +203,29 @@ function handleRemoveItemClick(event) {
 
 function handleCompleteOrderClick() {
   const paymentModal = document.querySelector('#payment-modal')
+  const paymentForm = document.querySelector('#payment-details-form')
+  resetForm(paymentForm)
   paymentModal.classList.remove('hidden')
+}
+
+function addModalCloseHandler() {
+  document.addEventListener('click', event => {
+    const paymentModal = document.querySelector('#payment-modal')
+    const modalContainer = document.querySelector('.modal-container')
+    const isTargetNotModalDescendant = !modalContainer.contains(event.target)
+    const isPaymentModalVisible = !paymentModal.classList.contains('hidden')
+
+    if (paymentModal && isTargetNotModalDescendant && isPaymentModalVisible) {
+      paymentModal.classList.add('hidden')
+    }
+  })
 }
 
 renderMenuItems()
 
 addButtonClickHandlers()
 
-addFormInputValidation()
+addFormListeners()
+
+addModalCloseHandler()
 

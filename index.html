@@ -30,16 +30,16 @@
       <section id="payment-modal" class="payment-modal hidden">
         <div class="modal-container">
           <div class="modal-title">Enter card details</div>
-          <form class="payment-details">
+          <form id="payment-details-form" class="payment-details" novalidate>
             <div class="input-wrapper">
               <input type="text" name="customer-name" id="customer-name" placeholder="Enter your name"
                 aria-label="Enter your name" minlength="4" required>
               <input type="text" name="customer-card-number" id="customer-card-number" placeholder="Enter card number"
-                minlength="19" maxlength="19" required>
-              <input type="text" name="customer-card-pw" id="customer-card-pw" placeholder="Enter CVV" maxlength="3"
-                required>
+                aria-label="Enter card number" pattern="\d{4}-\d{4}-\d{4}-\d{4}" minlength="19" maxlength="19" required>
+              <input type="text" name="customer-card-pw" id="customer-card-pw" placeholder="Enter CVV"
+                aria-label="Enter card CVV" pattern="\d{3}" maxlength="3" required>
             </div>
-            <button class="btn-pay" id="btn-pay" type="button">Pay</button>
+            <button class="btn-pay" id="btn-pay" type="submit">Pay</button>
           </form>
         </div>
       </section>
