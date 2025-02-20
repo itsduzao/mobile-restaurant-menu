@@ -27,15 +27,17 @@
       </section>
       <section id="order-checkout" class="order-checkout hidden ff-primary">
       </section>
-      <section class="payment-modal hidden">
+      <section id="payment-modal" class="payment-modal hidden">
         <div class="modal-container">
           <div class="modal-title">Enter card details</div>
           <form class="payment-details">
             <div class="input-wrapper">
               <input type="text" name="customer-name" id="customer-name" placeholder="Enter your name"
-                aria-label="Enter your name">
-              <input type="text" name="customer-card-number" id="customer-card-number" placeholder="Enter card number">
-              <input type="text" name="customer-card-pw" id="customer-card-pw" placeholder="Enter CVV">
+                aria-label="Enter your name" minlength="4" required>
+              <input type="text" name="customer-card-number" id="customer-card-number" placeholder="Enter card number"
+                minlength="19" maxlength="19" required>
+              <input type="text" name="customer-card-pw" id="customer-card-pw" placeholder="Enter CVV" maxlength="3"
+                required>
             </div>
             <button class="btn-pay" id="btn-pay" type="button">Pay</button>
           </form>

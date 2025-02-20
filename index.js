@@ -2,11 +2,40 @@ import { MENU_ITEMS } from './src/data/data.js'
 
 const orderItems = []
 
-document.addEventListener('click', event => {
-  if (event.target.classList.contains('btn-add') && event.target.dataset.id) {
-    handleMenuItemClick(event)
-  }
-})
+function addButtonClickHandlers() {
+  document.addEventListener('click', event => {
+    const hasDataId = event.target.dataset.id
+    const isBtnAdd = event.target.classList.contains('btn-add')
+    const isBtnRemove = event.target.classList.contains('btn-remove')
+    const isBtnCompleteOrder = event.target.id === 'btn-complete-order'
+
+    if (isBtnAdd && hasDataId) {
+      handleMenuItemClick(event)
+    }
+
+    if (isBtnRemove && hasDataId) {
+      handleRemoveItemClick(event)
+    }
+
+    if (isBtnCompleteOrder) {
+      handleCompleteOrderClick()
+    }
+  })
+}
+
+function addFormInputValidation() {
+  const cardNumberInput = document.getElementById('customer-card-number')
+  const cardPwInput = document.getElementById('customer-card-pw')
+
+  cardNumberInput.addEventListener('input', function () {
+    this.value = this.value.replace(/\D/g, '')
+    this.value = this.value.replace(/(\d{4})(?=\d)/g, '$1-')
+  })
+
+  cardPwInput.addEventListener('input', function () {
+    this.value = this.value.replace(/\D/g, '')
+  })
+}
 
 function getMenuItemsHTML(dataArr) {
   const htmlContent = []
@@ -78,7 +107,7 @@ function getOrderCheckoutHtml() {
               <div class="order-total-price-title">Total price:</div>
               <div class="order-total-price">$${totalPrice}</div>
             </div>
-            <button class="btn-complete-order" type="button">Complete order</button>
+            <button id="btn-complete-order" class="btn-complete-order" type="button">Complete order</button>
           </div>`
 }
 
@@ -86,5 +115,25 @@ function renderOrderCheckout() {
   document.getElementById('order-checkout').innerHTML = getOrderCheckoutHtml()
 }
 
+function handleRemoveItemClick(event) {
+  const itemId = Number(event.target.dataset.id)
+  const itemIndex = orderItems.findIndex(item => item.id === itemId)
+
+  if (itemIndex !== -1) {
+    orderItems.splice(itemIndex, 1)
+  }
+
+  renderOrderCheckout()
+}
+
+function handleCompleteOrderClick() {
+  const paymentModal = document.querySelector('#payment-modal')
+  paymentModal.classList.remove('hidden')
+}
+
 renderMenuItems()
+
+addButtonClickHandlers()
+
+addFormInputValidation()
 
