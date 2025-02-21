@@ -9,8 +9,8 @@
   --white: #ffffff;
   --btn-background: #16DB99;
   --input-border: #757575;
-  --bg-order-complete: #ECFDF5;
-  --fc-order-complete: #065F46;
+  --bg-order-success: #ECFDF5;
+  --color-order-success: #065F46;
 }
 
 body {
@@ -297,14 +297,14 @@ main {
   }
 }
 
-/* order complete */
+/* order-success */
 
-.order-complete {
+.order-success {
   .order-status {
     border-radius: 3px;
-    background-color: var(--bg-order-complete);
+    background-color: var(--bg-order-success);
     padding: 52px 0;
-    color: var(--fc-order-complete);
+    color: var(--color-order-success);
     font-size: 2rem;
     text-align: center;
   }
